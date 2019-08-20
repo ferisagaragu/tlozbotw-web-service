@@ -1,167 +1,33 @@
 define({ "api": [
   {
-    "type": "delete",
-    "url": "/deleteRegistClothing",
-    "title": "deleteRegistClothing",
-    "version": "0.0.1",
-    "group": "Clothing",
-    "parameter": {
-      "examples": [
-        {
-          "title": "Params - data:",
-          "content": "{\n  \"idUser\":\"FNfi3a5O8sNOI7B3v1HOoCBckOE2\",\n  \"idClothing\": 2\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "description": "<p>Servicio para eliminar un ropaje</p>",
-    "success": {
-      "examples": [
-        {
-          "title": "HTTP/1.1 200 OK",
-          "content": "{\n  \"message\": \"El ropaje no a sido eliminado\",\n  \"data\": {\n    \"idUser\": \"FNfi3a5O8sNOI7B3v1HOoCBckOE2\",\n    \"idClothing\": 2\n  }\n}",
-          "type": "json"
-        },
-        {
-          "title": "HTTP/1.1 201 Created",
-          "content": "{\n  \"message\": \"El ropaje a sido eliminado exitosamente\",\n  \"data\": {\n    \"idUser\": \"FNfi3a5O8sNOI7B3v1HOoCBckOE2\",\n    \"idClothing\": 2\n  }\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "error": {
-      "examples": [
-        {
-          "title": "HTTP/1.1 400 Bad Request",
-          "content": "{\n  \"code\": \"There are no parameters in the request\",\n  \"message\": \"Upps hubo un problema al procesar la información\"\n}",
-          "type": "json"
-        },
-        {
-          "title": "HTTP/1.1 500 Internal Server Error",
-          "content": "{\n  \"code\": trow error,\n  \"message\": \"Upps hubo un problema al procesar la información\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "src/services/clothing.rest.ts",
-    "groupTitle": "Clothing",
-    "name": "DeleteDeleteregistclothing"
-  },
-  {
-    "type": "get",
-    "url": "/getClothing",
-    "title": "getClothing",
-    "version": "0.0.1",
-    "group": "Clothing",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "id",
-            "description": "<p>FNfi3a5O8sNOI7B3v1HOoCBckOE2</p>"
-          }
-        ]
-      }
-    },
-    "description": "<p>Servicio para optener una lista de todos los ropajes con las modificaciones que el usuario a indicado</p>",
-    "success": {
-      "examples": [
-        {
-          "title": "HTTP/1.1 200 OK",
-          "content": "{\n  \"length\": 107,\n  \"data\": [\n    {\n      \"id\": 33,\n      \"zone\": \"Torso.\",\n      \"defending\": 4,\n      \"effect\": \"Resistencia ancestral.\",\n      \"name\": \"Armadura ancestral\",\n      \"dlc\": 0,\n      \"amiibo\": 0,\n      \"bonus\": 0,\n      \"img\": null,\n      \"check\": 0,\n      \"updateDefending\": null,\n      \"materials\": null,\n      \"level\": null\n    },\n    ...\n  ]\n}",
-          "type": "json"
-        },
-        {
-          "title": "HTTP/1.1 203 Non-Authoritative Information",
-          "content": "{\n  \"code\": \"User id dont exist\",\n  \"message\": \"El usuario con el que se solicito la informacion no existe\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "error": {
-      "examples": [
-        {
-          "title": "HTTP/1.1 400 Bad Request",
-          "content": "{\n  \"code\": \"User id is emply\",\n  \"message\": \"Upps hubo un problema al procesar la información\"\n}",
-          "type": "json"
-        },
-        {
-          "title": "HTTP/1.1 500 Internal Server Error",
-          "content": "{\n  \"code\": trow error,\n  \"message\": \"Upps hubo un problema al procesar la información\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "src/services/clothing.rest.ts",
-    "groupTitle": "Clothing",
-    "name": "GetGetclothing"
-  },
-  {
-    "type": "post",
-    "url": "/createOrUpdateClothing",
-    "title": "createOrUpdateClothing",
-    "version": "0.0.1",
-    "group": "Clothing",
-    "parameter": {
-      "examples": [
-        {
-          "title": "Params - data:",
-          "content": "{\n  \"idUser\":\"FNfi3a5O8sNOI7B3v1HOoCBckOE2\",\n  \"idClothing\": 1,\n  \"check\": 1,\n  \"levelP\": 1\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "description": "<p>Servicio para crear o actualizar los ropajes con las modificaciones que el usuario a indicado</p>",
-    "success": {
-      "examples": [
-        {
-          "title": "HTTP/1.1 201 Created - Create",
-          "content": "{\n  \"data\": {\n    \"queryCode\": \"insert\"\n  }\n}",
-          "type": "json"
-        },
-        {
-          "title": "HTTP/1.1 201 Created - Update",
-          "content": "{\n  \"data\": {\n    \"queryCode\": \"update\"\n  }\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "error": {
-      "examples": [
-        {
-          "title": "HTTP/1.1 400 Bad Request",
-          "content": "{\n  \"code\": \"There are no parameters in the request\",\n  \"message\": \"Upps hubo un problema al procesar la información\"\n}",
-          "type": "json"
-        },
-        {
-          "title": "HTTP/1.1 500 Internal Server Error",
-          "content": "{\n  \"code\": trow error,\n  \"message\": \"Upps hubo un problema al procesar la información\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "src/services/clothing.rest.ts",
-    "groupTitle": "Clothing",
-    "name": "PostCreateorupdateclothing"
-  },
-  {
     "type": "post",
     "url": "/login",
     "title": "login",
     "version": "0.0.1",
     "group": "Login",
     "parameter": {
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"email\": \"your user\",\n  \"password\": \"your password\"\n}",
+          "type": "json"
+        }
+      ],
       "fields": {
         "Parameter": [
           {
             "group": "Parameter",
-            "type": "string",
+            "type": "String",
             "optional": false,
-            "field": "id",
-            "description": "<p>FNfi3a5O8sNOI7B3v1HOoCBckOE2</p>"
+            "field": "email",
+            "description": "<p>Correo de prueba: ferisagaragu@gmail.com</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "password",
+            "description": "<p>Contraseña de prueba: 1234//</p>"
           }
         ]
       }
@@ -171,7 +37,7 @@ define({ "api": [
       "examples": [
         {
           "title": "HTTP/1.1 200 OK",
-          "content": "token",
+          "content": "{\n  \"token\": \"your api token\",\n  \"userData\": {\n    \"uid\": \"your id\",\n    \"email\": \"your email\",\n    \"name\": \"your name\",\n    \"potho\": \"your url photo\"\n  }\n}",
           "type": "json"
         }
       ]
@@ -180,12 +46,17 @@ define({ "api": [
       "examples": [
         {
           "title": "HTTP/1.1 400 Bad Request",
-          "content": "{ }",
+          "content": "{\n  \"code\": \"Faltan parametros para hacer la petición\",\n  \"message\": \"Upps hubo un problema al iniciar sesión\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "HTTP/1.1 403 Forbidden",
+          "content": "{\n  \"code\": {\n    ...error data\n  },\n  \"message\": \"El usuario o contraseña son incorrectos\"\n}",
           "type": "json"
         },
         {
           "title": "HTTP/1.1 500 Internal Server Error",
-          "content": "{ }",
+          "content": "{\n  \"code\": {\n    ...error data\n  },\n  \"message\": \"Upps hubo un problema al iniciar sesión\"\n}",
           "type": "json"
         }
       ]
@@ -196,29 +67,57 @@ define({ "api": [
   },
   {
     "type": "post",
-    "url": "/logout",
-    "title": "login",
+    "url": "/registerUser",
+    "title": "registerUser",
     "version": "0.0.1",
     "group": "Login",
     "parameter": {
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"email\": \"your user\",\n  \"password\": \"your password\",\n  \"name\": \"your name\",\n  \"potho\": \"your url photo\"\n}",
+          "type": "json"
+        }
+      ],
       "fields": {
         "Parameter": [
           {
             "group": "Parameter",
-            "type": "string",
+            "type": "String",
             "optional": false,
-            "field": "id",
-            "description": "<p>FNfi3a5O8sNOI7B3v1HOoCBckOE2</p>"
+            "field": "email",
+            "description": "<p>Correo de prueba: ferisagaragu@hotmail.com</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "password",
+            "description": "<p>Contraseña de prueba: 1234//</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>El nombre de prueba puede ser cualquiera (De preferencia ningun nombre grosero)</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "potho",
+            "description": "<p>La foto de usuario puede ser cualquiera solo copia un url (De preferencia que sea contenido para toda la familia)</p>"
           }
         ]
       }
     },
-    "description": "<p>Servicio para iniciar sesión</p>",
+    "description": "<p>Servicio para registar un nuevo usuario (Si el usuario ya estra registrado pide que lo borren)</p>",
     "success": {
       "examples": [
         {
           "title": "HTTP/1.1 200 OK",
-          "content": "token",
+          "content": "{\n  \"message\": \"Usuario registrado con el correo your email\",\n  \"data\": {\n    \"token\": \"your api token\",\n    \"userData\": {\n      \"email\": \"your email\",\n      \"uid\": \"your id\",\n      \"name\": \"your name\",\n      \"potho\": \"your url photo\"\n    }\n  }\n}",
           "type": "json"
         }
       ]
@@ -227,18 +126,23 @@ define({ "api": [
       "examples": [
         {
           "title": "HTTP/1.1 400 Bad Request",
-          "content": "{ }",
+          "content": "{\n  \"code\": \"Faltan parametros para hacer la petición\",\n  \"message\": \"Upps hubo un problema al registrar al usuario\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "HTTP/1.1 403 Forbidden",
+          "content": "{\n  \"code\": {\n    ...error data\n  },\n  \"message\": \"La dirección de correo electrónico ya está en uso por otra cuenta\"\n}",
           "type": "json"
         },
         {
           "title": "HTTP/1.1 500 Internal Server Error",
-          "content": "{ }",
+          "content": "{\n  \"code\": {\n    ...error data\n  },\n  \"message\": \"Upps hubo un problema al registrar al usuario\"\n}",
           "type": "json"
         }
       ]
     },
     "filename": "src/services/login.rest.ts",
     "groupTitle": "Login",
-    "name": "PostLogout"
+    "name": "PostRegisteruser"
   }
 ] });

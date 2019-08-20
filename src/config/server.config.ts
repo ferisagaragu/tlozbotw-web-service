@@ -9,9 +9,10 @@ export const server = http.createServer(router);
 
 router.use(morgan('dev'));
 router.use(bodyParser.json());
-router.use(bodyParser.urlencoded({ extended: true }));
+router.use(bodyParser.urlencoded({ extended: false }));
 router.use((req, res, next) => {
+  res.header("Content-Type" ,"application/json");
   res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
   next();
 });

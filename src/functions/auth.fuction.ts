@@ -69,3 +69,9 @@ export function _delete(urlRest: string, onAuth: Function) {
     });
   });
 }
+
+export function noVerifyGet(urlRest: string, onCallBack: Function) {
+  router.get(urlRest, (req: any, resp: any) => {
+    onCallBack(req, resp);
+  });
+}

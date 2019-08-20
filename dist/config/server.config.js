@@ -14,4 +14,9 @@ exports.server = http_1.default.createServer(exports.router);
 exports.router.use(morgan_1.default('dev'));
 exports.router.use(body_parser_1.default.json());
 exports.router.use(body_parser_1.default.urlencoded({ extended: true }));
+exports.router.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 //# sourceMappingURL=server.config.js.map

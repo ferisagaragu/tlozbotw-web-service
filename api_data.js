@@ -117,7 +117,7 @@ define({ "api": [
       "examples": [
         {
           "title": "HTTP/1.1 200 OK",
-          "content": "{\n  \"message\": \"Usuario registrado con el correo javabrain.email@gmail.com\",\n  \"data\": {\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRGF0YSI6eyJlbWFpbCI6ImphdmFicmFpbi5lbWFpbEBnbWFpbC5jb20iLCJ1aWQiOiJpQU5WcTdEUnFGT3l5SE16aUJJM09CZmNiVmcyIiwibmFtZSI6InlvdXIgbmFtZSIsInBvdGhvIjoieW91ciB1cmwgcGhvdG8ifSwiaWF0IjoxNTY2MzQwNjk0LCJleHAiOjE1NjYzNTg2OTR9.IqDQtTc69c7Ji3HZ-ez1VsNMB6_g0zYPtr9trgMd1qo\",\n    \"userData\": {\n      \"email\": \"javabrain.email@gmail.com\",\n      \"uid\": \"iANVq7DRqFOyyHMziBI3OBfcbVg2\",\n      \"name\": \"your name\",\n      \"potho\": \"your url photo\"\n    }\n  }\n}",
+          "content": "{\n  \"message\": \"Usuario registrado con el correo your email\",\n  \"data\": {\n    \"token\": \"your api token\",\n    \"userData\": {\n      \"email\": \"your email\",\n      \"uid\": \"your id\",\n      \"name\": \"your name\",\n      \"potho\": \"your url photo\"\n    }\n  }\n}",
           "type": "json"
         }
       ]

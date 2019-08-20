@@ -1,0 +1,16 @@
+install node whit typescript
+  npm init -y
+  npm i typescript tsc-watch
+  add to package.json
+
+  "scripts": {
+    "dev": "tsc-watch --onSuccess \"node ./dist/server.js\""
+  }
+  npx tsc --init --moduleResolution node --resolveJsonModule --target es6 --noImplicitAny --sourceMap --lib dom,es2017 --outDir dist
+
+install express
+  npm i express@5.0.0-alpha.7 @types/express cors @types/cors compression @types/compression @types/node
+  npm i morgan
+  npm i jsonwebtoken
+
+npm run dev

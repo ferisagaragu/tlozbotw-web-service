@@ -226,7 +226,7 @@ pre.language-api .str {
 
 pre.language-api .pln,
 pre.language-api .pun {
-  color: #65B042;
+  color: pink;
 }
 
 pre code {

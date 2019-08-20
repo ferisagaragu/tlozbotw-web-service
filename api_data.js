@@ -57,7 +57,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Request-Example:",
-          "content": "{\n  \"user\": \"your user\",\n  \"password\": \"your password\"\n}",
+          "content": "{\n  \"user\": \"your user\",\n  \"password\": \"your password\",\n  \"name\": \"your name\",\n  \"potho\": \"your url photo\"\n}",
           "type": "json"
         }
       ]

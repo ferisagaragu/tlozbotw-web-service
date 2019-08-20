@@ -1,0 +1,195 @@
+{
+	"info": {
+		"_postman_id": "0ff42717-4f99-4623-901c-8f4f25fdc35e",
+		"name": "tlozbotw",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "login",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "data",
+									"value": "{\n \"idUser\":\"FNfi3a5O8sNOI7B3v1HOoCBckOE2\",\n  \"idClothing\": 2\n}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3400/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3400",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "clothing",
+			"item": [
+				{
+					"name": "getClothing",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxfSwiaWF0IjoxNTY1Mjc3NzE1LCJleHAiOjE1NjUyOTU3MTV9.rusonkLp_2f3yxA3pO0DSAS1Wz9n03Nt81MZ-pIrIhc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3400/getClothing?id=FNfi3a5O8sNOI7B3v1HOoCBckOE2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3400",
+							"path": [
+								"getClothing"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "FNfi3a5O8sNOI7B3v1HOoCBckOE2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createOrUpdateClothing",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxfSwiaWF0IjoxNTY1Mjc3NzE1LCJleHAiOjE1NjUyOTU3MTV9.rusonkLp_2f3yxA3pO0DSAS1Wz9n03Nt81MZ-pIrIhc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "data",
+									"value": "{\n    \"idUser\": \"FNfi3a5O8sNOI7B3v1HOoCBckOE2\",\n    \"idClothing\": 2,\n    \"check\": 1,\n    \"levelP\": 0\n}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3400/createOrUpdateClothing",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3400",
+							"path": [
+								"createOrUpdateClothing"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteRegistClothing",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxfSwiaWF0IjoxNTY1Mjk1ODE5LCJleHAiOjE1NjUzMTM4MTl9.pqVDHDsDQMOpHnMIXPKTTkntFv2P1uZ6C8EqFccYLMA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "data",
+									"value": "{\n    \"idUser\": \"FNfi3a5O8sNOI7B3v1HOoCBckOE2\",\n    \"idClothing\": 2\n}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3400/deleteRegistClothing",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3400",
+							"path": [
+								"deleteRegistClothing"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

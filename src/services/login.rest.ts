@@ -18,7 +18,9 @@ class LoginRest {
   public login(): void {
     auth('/login', (req: Request, resp: any, jwt: any, secretKey: string) => {
       const user = { id: 1 };
-      resp.send(jwt.sign({ user }, secretKey, { expiresIn: '5h' }));
+      resp.send({
+        token: jwt.sign({ user }, secretKey, { expiresIn: '5h' })
+      });
     });
   }
 

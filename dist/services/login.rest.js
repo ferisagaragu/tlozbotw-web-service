@@ -18,7 +18,9 @@ class LoginRest {
     login() {
         auth_fuction_1.auth('/login', (req, resp, jwt, secretKey) => {
             const user = { id: 1 };
-            resp.send(jwt.sign({ user }, secretKey, { expiresIn: '5h' }));
+            resp.send({
+                token: jwt.sign({ user }, secretKey, { expiresIn: '5h' })
+            });
         });
     }
     /**

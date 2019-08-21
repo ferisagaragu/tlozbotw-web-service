@@ -1,6 +1,7 @@
 import firebase from '../config/firebase.config';
-import { auth, get, noVerifyGet } from '../functions/auth.fuction';
+import { auth, noVerifyGet } from '../functions/auth.fuction';
 import ResponseCreator from '../functions/response-creator.function';
+import { connection } from '../config/mysql-connector.confing';
 
 class LoginRest {
 
@@ -39,7 +40,8 @@ class LoginRest {
           "uid": "your id",
           "email": "your email",
           "name": "your name",
-          "potho": "your url photo"
+          "photo": "your url photo",
+          "role": your number role
         }
       }
     @apiErrorExample {json} HTTP/1.1 400 Bad Request
@@ -71,19 +73,23 @@ class LoginRest {
         firebase.auth()
           .signInWithEmailAndPassword(email, password)
           .then((snapshot: any) => {
-            const userData = { 
-              uid: snapshot.user.uid,
-              email: snapshot.user.email,
-              name: 'your name',
-              potho: 'your url photo'
-            };
-            
-            //Falta aquí registrar la informacion en base de datos
-
-            resp.status(200);
-            resp.send({
-              token: jwt.sign({ userData }, secretKey, { expiresIn: '5h' }),
-              userData
+            connection.query(`call tlozbotw.getUser('${snapshot.user.uid}')`,(err, result) => {
+              if (err) throw err;
+              const { id, email, name, photo, role } = result[0][0];
+              
+              const userData = { 
+                email, 
+                uid: id,
+                name,
+                photo,
+                role
+              };
+              
+              resp.status(200);
+              resp.send({
+                token: jwt.sign({ userData }, secretKey, { expiresIn: '5h' }),
+                userData
+              });
             });
           }).catch((error: any) => {
             if (error.code === 'auth/wrong-password') {
@@ -119,12 +125,12 @@ class LoginRest {
         "email": "your user",
         "password": "your password",
         "name": "your name",
-        "potho": "your url photo"
+        "photo": "your url photo"
       }
     @apiParam {String} email Correo de prueba: ferisagaragu@hotmail.com
     @apiParam {String} password Contraseña de prueba: 1234//
     @apiParam {String} name El nombre de prueba puede ser cualquiera (De preferencia ningun nombre grosero)
-    @apiParam {String} potho La foto de usuario puede ser cualquiera solo copia un url 
+    @apiParam {String} photo La foto de usuario puede ser cualquiera solo copia un url 
                              (De preferencia que sea contenido para toda la familia)
     @apiDescription Servicio para registar un nuevo usuario (Si el usuario ya estra registrado pide que lo borren)
     @apiSuccessExample {json} HTTP/1.1 200 OK
@@ -136,7 +142,8 @@ class LoginRest {
             "email": "your email",
             "uid": "your id",
             "name": "your name",
-            "potho": "your url photo"
+            "photo": "your url photo",
+            "role": your number role
           }
         }
       }
@@ -164,29 +171,33 @@ class LoginRest {
     auth('/registerUser', (req: any, resp: any, jwt: any, secretKey: string) => {
       const response: ResponseCreator = new ResponseCreator();
       if ( req.body.email && req.body.password && req.body.name && req.body.potho ) {
-        const { email, password } = req.body;
+        const { email, password, name, potho } = req.body;
 
         firebase.auth()
           .createUserWithEmailAndPassword(email, password)
           .then((snapshot: any) => {
-            const userData = { 
-              email: snapshot.user.email, 
-              uid: snapshot.user.uid,
-              name: 'your name',
-              potho: 'your url photo'
-            };
+            connection.query(`call tlozbotw.registerOrUpadateUser('${snapshot.user.uid}', '${snapshot.user.email}', '${name}', '${potho}', 0)`,(err, result) => {
+              if (err) throw err;
+              const { id, email, name, photo, role } = result[0][0];
+              
+              const userData = { 
+                email, 
+                uid: id,
+                name,
+                photo,
+                role
+              };
 
-            //Falta aquí registrar la informacion en base de datos
-
-            response._200(
-              resp, 
-              {
-                token: jwt.sign({ userData }, secretKey, { expiresIn: '5h' }),
-                userData
-              },
-              0, 
-              `Usuario registrado con el correo ${userData.email}`
-            );
+              response._200(
+                resp, 
+                {
+                  token: jwt.sign({ userData }, secretKey, { expiresIn: '5h' }),
+                  userData
+                },
+                0, 
+                `Usuario registrado con el correo ${userData.email}`
+              );
+            });
           }).catch((error: any) => {
             if (error.code === 'auth/email-already-in-use') {
               response._403(

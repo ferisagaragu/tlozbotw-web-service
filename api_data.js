@@ -37,7 +37,7 @@ define({ "api": [
       "examples": [
         {
           "title": "HTTP/1.1 200 OK",
-          "content": "{\n  \"token\": \"your api token\",\n  \"userData\": {\n    \"uid\": \"your id\",\n    \"email\": \"your email\",\n    \"name\": \"your name\",\n    \"potho\": \"your url photo\"\n  }\n}",
+          "content": "{\n  \"token\": \"your api token\",\n  \"userData\": {\n    \"uid\": \"your id\",\n    \"email\": \"your email\",\n    \"name\": \"your name\",\n    \"photo\": \"your url photo\",\n    \"role\": your number role\n  }\n}",
           "type": "json"
         }
       ]
@@ -75,7 +75,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Request-Example:",
-          "content": "{\n  \"email\": \"your user\",\n  \"password\": \"your password\",\n  \"name\": \"your name\",\n  \"potho\": \"your url photo\"\n}",
+          "content": "{\n  \"email\": \"your user\",\n  \"password\": \"your password\",\n  \"name\": \"your name\",\n  \"photo\": \"your url photo\"\n}",
           "type": "json"
         }
       ],
@@ -106,7 +106,7 @@ define({ "api": [
             "group": "Parameter",
             "type": "String",
             "optional": false,
-            "field": "potho",
+            "field": "photo",
             "description": "<p>La foto de usuario puede ser cualquiera solo copia un url (De preferencia que sea contenido para toda la familia)</p>"
           }
         ]
@@ -117,7 +117,7 @@ define({ "api": [
       "examples": [
         {
           "title": "HTTP/1.1 200 OK",
-          "content": "{\n  \"message\": \"Usuario registrado con el correo your email\",\n  \"data\": {\n    \"token\": \"your api token\",\n    \"userData\": {\n      \"email\": \"your email\",\n      \"uid\": \"your id\",\n      \"name\": \"your name\",\n      \"potho\": \"your url photo\"\n    }\n  }\n}",
+          "content": "{\n  \"message\": \"Usuario registrado con el correo your email\",\n  \"data\": {\n    \"token\": \"your api token\",\n    \"userData\": {\n      \"email\": \"your email\",\n      \"uid\": \"your id\",\n      \"name\": \"your name\",\n      \"photo\": \"your url photo\",\n      \"role\": your number role\n    }\n  }\n}",
           "type": "json"
         }
       ]

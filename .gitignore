@@ -45,9 +45,6 @@ build/Release
 
 # Dependency directories
 node_modules/
-apidoc/*
-apidoc/
-dist/
 
 # Optional npm cache directory
 .npm
@@ -66,3 +63,9 @@ dist/
 
 # dotenv environment variables file
 .env
+
+apidoc/*
+
+apidoc/
+
+dist/

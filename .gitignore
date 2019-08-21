@@ -64,8 +64,5 @@ node_modules/
 # dotenv environment variables file
 .env
 
-apidoc/*
-
-apidoc/
-
 dist/
+apidoc/

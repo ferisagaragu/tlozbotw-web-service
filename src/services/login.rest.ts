@@ -9,16 +9,15 @@ class LoginRest {
     noVerifyGet('/devToken', (req: any, resp: any) => {
       resp.status(200);
       resp.send(
-                'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.' +
-                'eyJ1c2VyRGF0YSI6eyJ1aWQiOiJiN0daWHFrU1FLYm1' +
-                'lbkx1M2hyQ1J5SERldWUyIiwiZW1haWwiOiJmZXJpc2' +
-                'FnYXJhZ3VAZ21haWwuY29tIiwibmFtZSI6InlvdXIgb' +
-                'mFtZSIsInBvdGhvIjoieW91ciB1cmwgcGhvdG8ifSwi' +
-                'aWF0IjoxNTY2MzQxNTczLCJleHAiOjE1OTc4Nzc1NzN9' +
-                '.oCTE3FaCLbOKky1vDL-T_PTL8wljQb9u-JO29iWgKIM'
-              );
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.' +
+        'eyJ1c2VyRGF0YSI6eyJ1aWQiOiJiN0daWHFrU1FLYm1' +
+        'lbkx1M2hyQ1J5SERldWUyIiwiZW1haWwiOiJmZXJpc2' + 
+        'FnYXJhZ3VAZ21haWwuY29tIiwibmFtZSI6InlvdXIgb' +
+        'mFtZSIsInBvdGhvIjoieW91ciB1cmwgcGhvdG8ifSwi' +
+        'aWF0IjoxNTY2MzQxNTczLCJleHAiOjE1OTc4Nzc1NzN9' +
+        '.oCTE3FaCLbOKky1vDL-T_PTL8wljQb9u-JO29iWgKIM'
+      );
     });
-      
   }
 
   /**

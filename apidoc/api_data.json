@@ -1,5 +1,57 @@
 [
   {
+    "type": "get",
+    "url": "/getUsers",
+    "title": "getUsers",
+    "version": "0.0.1",
+    "group": "Login",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Id de prueba: 7ewYFPWBM6NyhPulPgOeJBr3HBW2</p>"
+          }
+        ]
+      }
+    },
+    "description": "<p>Servicio para obtener un listado de todos los usuarios de el sistema (este servicio solo puede ser consumido por un usuario administrador)</p>",
+    "success": {
+      "examples": [
+        {
+          "title": "HTTP/1.1 200 OK",
+          "content": "{\n  \"length\": 1,\n  \"data\": [\n    {\n      \"id\": \"user id\",\n      \"email\": \"user email\",\n      \"name\": \"user name\",\n      \"photo\": \"user url photo\",\n      \"role\": user role name\n    }\n  ]\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "HTTP/1.1 400 Bad Request",
+          "content": "{\n  \"code\": \"Faltan parametros para hacer la petición\",\n  \"message\": \"Upps hubo un problema al obtener los usuarios\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "HTTP/1.1 403 Forbidden",
+          "content": "{\n  \"code\": {\n    ...error data\n  },\n  \"message\": \"Upps hubo un problema al obtener los usuarios\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "HTTP/1.1 500 Internal Server Error",
+          "content": "{\n  \"code\": {\n    ...error data\n  },\n  \"message\": \"Upps hubo un problema al obtener los usuarios\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/services/login.rest.ts",
+    "groupTitle": "Login",
+    "name": "GetGetusers"
+  },
+  {
     "type": "post",
     "url": "/login",
     "title": "login",

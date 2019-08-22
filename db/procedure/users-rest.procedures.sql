@@ -3,12 +3,12 @@ use tlozbotw;
 DELIMITER //
 create procedure getUser(in idIn varchar(100)) 
 begin
-  select * from tlozbotw.users where id = idIn;
+  select * from tlozbotw.users where id = idIn limit 1;
 end//
 DELIMITER ;
 
 DELIMITER //
-create procedure registerOrUpadateUser(in idIn varchar(100), in emailIn varchar(80), in nameIn varchar(300), in photoIn varchar(900),in role int) 
+create procedure registerOrUpdateUser(in idIn varchar(100), in emailIn varchar(80), in nameIn varchar(300), in photoIn varchar(900),in role int) 
 begin
 	
   if (select count(*) from users where email = emailIn) = 0 then 
@@ -29,5 +29,14 @@ begin
   end if;
   
   select * from users where email = emailIn limit 1;
+end//
+DELIMITER ;
+
+DELIMITER //
+create procedure getUsersData(in idIn varchar(100)) 
+begin
+  if (select count(*) from tlozbotw.users where id = idIn and role = 1) = 1 then 
+    select * from tlozbotw.users where id != idIn;
+  end if;
 end//
 DELIMITER ;

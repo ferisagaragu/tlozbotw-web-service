@@ -1,34 +1,10 @@
 {
 	"info": {
-		"_postman_id": "e177e272-4cd3-4e4e-8c15-f749c18ccecc",
+		"_postman_id": "0ff42717-4f99-4623-901c-8f4f25fdc35e",
 		"name": "tlozbotw",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
-		{
-			"name": "token",
-			"item": [
-				{
-					"name": "devToken",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3400/devToken",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3400",
-							"path": [
-								"devToken"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
 		{
 			"name": "login",
 			"item": [
@@ -135,6 +111,36 @@
 								{
 									"key": "id",
 									"value": "7ewYFPWBM6NyhPulPgOeJBr3HBW2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "bow",
+			"item": [
+				{
+					"name": "getBows",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3400/getBows?id=zmqixDaO5xQS7lfq4tZUfRFUHDY2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3400",
+							"path": [
+								"getBows"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "zmqixDaO5xQS7lfq4tZUfRFUHDY2"
 								}
 							]
 						}

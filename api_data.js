@@ -1,10 +1,10 @@
 define({ "api": [
   {
     "type": "get",
-    "url": "/getUsers",
-    "title": "getUsers",
+    "url": "/getbows",
+    "title": "getBows",
     "version": "0.0.1",
-    "group": "Login",
+    "group": "Bows",
     "parameter": {
       "fields": {
         "Parameter": [
@@ -13,17 +13,17 @@ define({ "api": [
             "type": "String",
             "optional": false,
             "field": "id",
-            "description": "<p>Id de prueba: 7ewYFPWBM6NyhPulPgOeJBr3HBW2</p>"
+            "description": "<p>Id del usuario del que se obtendran sus arcos</p>"
           }
         ]
       }
     },
-    "description": "<p>Servicio para obtener un listado de todos los usuarios de el sistema (este servicio solo puede ser consumido por un usuario administrador)</p>",
+    "description": "<p>Servicio para obtener arcos dependiendo del id del usuario</p>",
     "success": {
       "examples": [
         {
           "title": "HTTP/1.1 200 OK",
-          "content": "{\n  \"length\": 1,\n  \"data\": [\n    {\n      \"id\": \"user id\",\n      \"email\": \"user email\",\n      \"name\": \"user name\",\n      \"photo\": \"user url photo\",\n      \"role\": user role name\n    }\n  ]\n}",
+          "content": "{\n  \"length\": bows length,\n  \"data\": [\n    {\n      \"id\": bow id,\n      \"name\": \"bow name\",\n      \"img\": \"bow image src\",\n      \"damage\": \"bow damage\",\n      \"description\": \"bow description\",\n      \"photo\": user photo status\n    }, \n    ...\n  ]\n}",
           "type": "json"
         }
       ]
@@ -32,24 +32,24 @@ define({ "api": [
       "examples": [
         {
           "title": "HTTP/1.1 400 Bad Request",
-          "content": "{\n  \"code\": \"Faltan parametros para hacer la petición\",\n  \"message\": \"Upps hubo un problema al obtener los usuarios\"\n}",
+          "content": "{\n  \"code\": \"Faltan parametros para hacer la petición\",\n  \"message\": \"Upps hubo un problema al obtener los datos\"\n}",
           "type": "json"
         },
         {
           "title": "HTTP/1.1 403 Forbidden",
-          "content": "{\n  \"code\": {\n    ...error data\n  },\n  \"message\": \"Upps hubo un problema al obtener los usuarios\"\n}",
+          "content": "{\n  \"code\": {\n    mySQL throw error\n  },\n  \"message\": \"Upps hubo un problema al obtener los datos\"\n}",
           "type": "json"
         },
         {
           "title": "HTTP/1.1 500 Internal Server Error",
-          "content": "{\n  \"code\": {\n    ...error data\n  },\n  \"message\": \"Upps hubo un problema al obtener los usuarios\"\n}",
+          "content": "{\n  \"code\": {\n    ...error data\n  },\n  \"message\": \"Upps hubo un problema al obtener los datos\"\n}",
           "type": "json"
         }
       ]
     },
-    "filename": "src/services/login.rest.ts",
-    "groupTitle": "Login",
-    "name": "GetGetusers"
+    "filename": "src/services/bow.rest.ts",
+    "groupTitle": "Bows",
+    "name": "GetGetbows"
   },
   {
     "type": "post",

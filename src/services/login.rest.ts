@@ -266,7 +266,7 @@ class LoginRest {
         "code": {
           ...error data
         },
-        "message": "Ups hubo un problema al obtener los usuarios"
+        "message": "Upps hubo un problema al obtener los usuarios"
       }
     @apiErrorExample {json} HTTP/1.1 500 Internal Server Error
       {
@@ -283,7 +283,14 @@ class LoginRest {
         const { id } = req.query;
 
         connection.query(`call tlozbotw.getUsersData('${id}');`, (err, result) => {
-          if (err) throw err;
+          if (err) {
+            response._500(
+              resp,
+              err,
+              'Upps hubo un problema al obtener los usuarios'
+            );
+            throw err;
+          }
           
           if (result[0]) {
             response._200(
@@ -295,7 +302,7 @@ class LoginRest {
             response._403(
               resp,
               'El rol del usuario no esta autorizado',
-              'Ups hubo un problema al obtener los usuarios'
+              'Upps hubo un problema al obtener los usuarios'
             );
           }
         });

@@ -91,6 +91,55 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "getUsers",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRGF0YSI6eyJ1aWQiOiJiN0daWHFrU1FLYm1lbkx1M2hyQ1J5SERldWUyIiwiZW1haWwiOiJmZXJpc2FnYXJhZ3VAZ21haWwuY29tIiwibmFtZSI6InlvdXIgbmFtZSIsInBvdGhvIjoieW91ciB1cmwgcGhvdG8ifSwiaWF0IjoxNTY2MzQxNTczLCJleHAiOjE1OTc4Nzc1NzN9.oCTE3FaCLbOKky1vDL-T_PTL8wljQb9u-JO29iWgKIM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "http://localhost:3400/getUsers?id=7ewYFPWBM6NyhPulPgOeJBr3HBW2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3400",
+							"path": [
+								"getUsers"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "7ewYFPWBM6NyhPulPgOeJBr3HBW2"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}

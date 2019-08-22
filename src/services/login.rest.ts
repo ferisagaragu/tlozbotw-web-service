@@ -1,5 +1,5 @@
 import firebase from '../config/firebase.config';
-import { auth, noVerifyGet } from '../functions/auth.fuction';
+import { auth, noVerifyGet, get } from '../functions/auth.fuction';
 import ResponseCreator from '../functions/response-creator.function';
 import { connection } from '../config/mysql-connector.confing';
 
@@ -73,7 +73,14 @@ class LoginRest {
           .signInWithEmailAndPassword(email, password)
           .then((snapshot: any) => {
             connection.query(`call tlozbotw.getUser('${snapshot.user.uid}')`,(err, result) => {
-              if (err) throw err;
+              if (err) {
+                response._500(
+                  resp,
+                  err,
+                  'Upps no se pudo registrar el usuario'
+                );
+                throw err;
+              }
               const { id, email, name, photo, role } = result[0][0];
               
               const userData = { 
@@ -175,8 +182,15 @@ class LoginRest {
         firebase.auth()
           .createUserWithEmailAndPassword(email, password)
           .then((snapshot: any) => {
-            connection.query(`call tlozbotw.registerOrUpadateUser('${snapshot.user.uid}', '${snapshot.user.email}', '${name}', '${potho}', 0)`,(err, result) => {
-              if (err) throw err;
+            connection.query(`call tlozbotw.registerOrUpdateUser('${snapshot.user.uid}', '${snapshot.user.email}', '${name}', '${potho}', 0)`,(err, result) => {
+              if (err) {
+                response._500(
+                  resp,
+                  err,
+                  'Upps no se pudo registrar el usuario'
+                );
+                throw err;
+              }
               const { id, email, name, photo, role } = result[0][0];
               
               const userData = { 
@@ -222,6 +236,86 @@ class LoginRest {
     });
   }
   
+  /**
+    @api {get} /getUsers getUsers
+    @apiVersion 0.0.1
+    @apiGroup Login
+    @apiParam {String} id Id de prueba: 7ewYFPWBM6NyhPulPgOeJBr3HBW2
+    @apiDescription Servicio para obtener un listado de todos los usuarios de el sistema 
+                    (este servicio solo puede ser consumido por un usuario administrador)
+    @apiSuccessExample {json} HTTP/1.1 200 OK
+      {
+        "length": 1,
+        "data": [
+          {
+            "id": "user id",
+            "email": "user email",
+            "name": "user name",
+            "photo": "user url photo",
+            "role": user role name
+          }
+        ]
+      }
+    @apiErrorExample {json} HTTP/1.1 400 Bad Request
+      {
+        "code": "Faltan parametros para hacer la petición",
+        "message": "Upps hubo un problema al obtener los usuarios"
+      }
+    @apiErrorExample {json} HTTP/1.1 403 Forbidden
+      {
+        "code": {
+          ...error data
+        },
+        "message": "Upps hubo un problema al obtener los usuarios"
+      }
+    @apiErrorExample {json} HTTP/1.1 500 Internal Server Error
+      {
+        "code": {
+          ...error data
+        },
+        "message": "Upps hubo un problema al obtener los usuarios"
+      }
+  */
+  public getUsers(): void {
+    get('/getUsers', (req: any, resp: any) => {
+      const response: ResponseCreator = new ResponseCreator();
+      if (req.query.id) {
+        const { id } = req.query;
+
+        connection.query(`call tlozbotw.getUsersData('${id}');`, (err, result) => {
+          if (err) {
+            response._500(
+              resp,
+              err,
+              'Upps hubo un problema al obtener los usuarios'
+            );
+            throw err;
+          }
+          
+          if (result[0]) {
+            response._200(
+              resp,
+              result[0],
+              result[0].length
+            );
+          } else {
+            response._403(
+              resp,
+              'El rol del usuario no esta autorizado',
+              'Upps hubo un problema al obtener los usuarios'
+            );
+          }
+        });
+
+      } else {
+        response._400(
+          resp, 
+          'Faltan parametros para hacer la petición',
+          'Upps hubo un problema al obtener los usuarios'
+        );
+      }
+    });
+  }
 }
 
 export default LoginRest;

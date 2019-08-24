@@ -46,21 +46,28 @@ class LoginRest {
     @apiErrorExample {json} HTTP/1.1 400 Bad Request
       {
         "code": "Faltan parametros para hacer la petición",
-        "message": "Upps hubo un problema al iniciar sesión"
+        "message": "Hubo un problema al iniciar sesión"
       }
-    @apiErrorExample {json} HTTP/1.1 403 Forbidden
+    @apiErrorExample {json} HTTP/1.1 403 Forbidden - case 1
       {
         "code": {
           ...error data
         },
         "message": "El usuario o contraseña son incorrectos"
       }
+    @apiErrorExample {json} HTTP/1.1 403 Forbidden - case 2
+      {
+        "code": {
+          ...error data
+        },
+        "message": "El usuario ingresado no esta registrado"
+      }
     @apiErrorExample {json} HTTP/1.1 500 Internal Server Error
       {
         "code": {
           ...error data
         },
-        "message": "Upps hubo un problema al iniciar sesión"
+        "message": "Hubo un problema al iniciar sesión"
       }
   */
   public login(): void {
@@ -77,46 +84,65 @@ class LoginRest {
                 response._500(
                   resp,
                   err,
-                  'Upps no se pudo registrar el usuario'
+                  'Hubo un problema al iniciar sesión'
                 );
                 throw err;
               }
-              const { id, email, name, photo, role } = result[0][0];
-              
-              const userData = { 
-                email, 
-                uid: id,
-                name,
-                photo,
-                role
-              };
-              
-              resp.status(200);
-              resp.send({
-                token: jwt.sign({ userData }, secretKey, { expiresIn: '5h' }),
-                userData
-              });
+              if (result[0][0]) {
+                const { id, email, name, photo, role } = result[0][0];
+                
+                const userData = { 
+                  email, 
+                  uid: id,
+                  name,
+                  photo,
+                  role
+                };
+                
+                resp.status(200);
+                resp.send({
+                  token: jwt.sign({ userData }, secretKey, { expiresIn: '5h' }),
+                  userData
+                });
+              } else {
+                response._500(
+                  resp,
+                  'El usuario no esta registrado en la base de datos pero si en firebase',
+                  'Hubo un problema al iniciar sesión'
+                );
+              }
             });
           }).catch((error: any) => {
-            if (error.code === 'auth/wrong-password') {
-              response._403(
-                resp,
-                error,
-                'El usuario o contraseña son incorrectos'
-              );
-            } else {
-              response._500(
-                resp,
-                error,
-                'Upps hubo un problema al iniciar sesión'
-              );
+            switch(error.code) {
+              case 'auth/user-not-found': {
+                response._403(
+                  resp,
+                  error,
+                  'El usuario ingresado no esta registrado'
+                );
+              } break;
+
+              case 'auth/wrong-password': {
+                response._403(
+                  resp,
+                  error,
+                  'El usuario o contraseña son incorrectos'
+                );
+              } break;
+
+              default: 
+                response._500(
+                  resp,
+                  error,
+                  'Hubo un problema al iniciar sesión'
+                );
             }
           });
       } else {
         response._400(
           resp, 
           'Faltan parametros para hacer la petición',
-          'Upps hubo un problema al iniciar sesión'
+          'Hubo un problema al iniciar sesión'
         );
       }
     });
@@ -156,7 +182,7 @@ class LoginRest {
     @apiErrorExample {json} HTTP/1.1 400 Bad Request
       {
         "code": "Faltan parametros para hacer la petición",
-        "message": "Upps hubo un problema al registrar al usuario"
+        "message": "Hubo un problema al registrar al usuario"
       }
     @apiErrorExample {json} HTTP/1.1 403 Forbidden
       {
@@ -170,24 +196,24 @@ class LoginRest {
         "code": {
           ...error data
         },
-        "message": "Upps hubo un problema al registrar al usuario"
+        "message": "Hubo un problema al registrar al usuario"
       }
   */
   public registerUser(): void {
     auth('/registerUser', (req: any, resp: any, jwt: any, secretKey: string) => {
       const response: ResponseCreator = new ResponseCreator();
-      if ( req.body.email && req.body.password && req.body.name && req.body.potho ) {
-        const { email, password, name, potho } = req.body;
+      if ( req.body.email && req.body.password && req.body.name && req.body.photo ) {
+        const { email, password, name, photo } = req.body;
 
         firebase.auth()
           .createUserWithEmailAndPassword(email, password)
           .then((snapshot: any) => {
-            connection.query(`call tlozbotw.registerOrUpdateUser('${snapshot.user.uid}', '${snapshot.user.email}', '${name}', '${potho}', 0)`,(err, result) => {
+            connection.query(`call tlozbotw.registerOrUpdateUser('${snapshot.user.uid}', '${snapshot.user.email}', '${name}', '${photo}', 0)`,(err, result) => {
               if (err) {
                 response._500(
                   resp,
                   err,
-                  'Upps no se pudo registrar el usuario'
+                  'Hubo un problema al registrar al usuario'
                 );
                 throw err;
               }
@@ -222,7 +248,7 @@ class LoginRest {
               response._500(
                 resp,
                 error,
-                'Upps hubo un problema al registrar al usuario'
+                'Hubo un problema al registrar al usuario'
               );
             }
           });
@@ -230,7 +256,7 @@ class LoginRest {
         response._400(
           resp, 
           'Faltan parametros para hacer la petición',
-          'Upps hubo un problema al registrar al usuario'
+          'Hubo un problema al registrar al usuario'
         );
       }
     });
@@ -259,21 +285,21 @@ class LoginRest {
     @apiErrorExample {json} HTTP/1.1 400 Bad Request
       {
         "code": "Faltan parametros para hacer la petición",
-        "message": "Upps hubo un problema al obtener los usuarios"
+        "message": "Hubo un problema al obtener los usuarios"
       }
     @apiErrorExample {json} HTTP/1.1 403 Forbidden
       {
         "code": {
           ...error data
         },
-        "message": "Upps hubo un problema al obtener los usuarios"
+        "message": "Hubo un problema al obtener los usuarios"
       }
     @apiErrorExample {json} HTTP/1.1 500 Internal Server Error
       {
         "code": {
           ...error data
         },
-        "message": "Upps hubo un problema al obtener los usuarios"
+        "message": "Hubo un problema al obtener los usuarios"
       }
   */
   public getUsers(): void {
@@ -287,7 +313,7 @@ class LoginRest {
             response._500(
               resp,
               err,
-              'Upps hubo un problema al obtener los usuarios'
+              'Hubo un problema al obtener los usuarios'
             );
             throw err;
           }
@@ -302,7 +328,7 @@ class LoginRest {
             response._403(
               resp,
               'El rol del usuario no esta autorizado',
-              'Upps hubo un problema al obtener los usuarios'
+              'Hubo un problema al obtener los usuarios'
             );
           }
         });
@@ -311,7 +337,7 @@ class LoginRest {
         response._400(
           resp, 
           'Faltan parametros para hacer la petición',
-          'Upps hubo un problema al obtener los usuarios'
+          'Hubo un problema al obtener los usuarios'
         );
       }
     });

@@ -1,7 +1,7 @@
 [
   {
     "type": "get",
-    "url": "/getbows?id=",
+    "url": "/getbows",
     "title": "getBows",
     "version": "0.0.1",
     "group": "Bows",
@@ -13,7 +13,7 @@
             "type": "String",
             "optional": false,
             "field": "id",
-            "description": "<p>Id del usuario del que se obtendran sus arcos. Id de prueba zmqixDaO5xQS7lfq4tZUfRFUHDY2</p>"
+            "description": "<p>Id del usuario del que se obtendran sus arcos</p>"
           }
         ]
       }
@@ -49,7 +49,7 @@
     },
     "filename": "src/services/bow.rest.ts",
     "groupTitle": "Bows",
-    "name": "GetGetbowsId"
+    "name": "GetGetbows"
   },
   {
     "type": "get",
@@ -84,17 +84,17 @@
       "examples": [
         {
           "title": "HTTP/1.1 400 Bad Request",
-          "content": "{\n  \"code\": \"Faltan parametros para hacer la petición\",\n  \"message\": \"Upps hubo un problema al obtener los usuarios\"\n}",
+          "content": "{\n  \"code\": \"Faltan parametros para hacer la petición\",\n  \"message\": \"Hubo un problema al obtener los usuarios\"\n}",
           "type": "json"
         },
         {
           "title": "HTTP/1.1 403 Forbidden",
-          "content": "{\n  \"code\": {\n    ...error data\n  },\n  \"message\": \"Upps hubo un problema al obtener los usuarios\"\n}",
+          "content": "{\n  \"code\": {\n    ...error data\n  },\n  \"message\": \"Hubo un problema al obtener los usuarios\"\n}",
           "type": "json"
         },
         {
           "title": "HTTP/1.1 500 Internal Server Error",
-          "content": "{\n  \"code\": {\n    ...error data\n  },\n  \"message\": \"Upps hubo un problema al obtener los usuarios\"\n}",
+          "content": "{\n  \"code\": {\n    ...error data\n  },\n  \"message\": \"Hubo un problema al obtener los usuarios\"\n}",
           "type": "json"
         }
       ]
@@ -150,17 +150,22 @@
       "examples": [
         {
           "title": "HTTP/1.1 400 Bad Request",
-          "content": "{\n  \"code\": \"Faltan parametros para hacer la petición\",\n  \"message\": \"Upps hubo un problema al iniciar sesión\"\n}",
+          "content": "{\n  \"code\": \"Faltan parametros para hacer la petición\",\n  \"message\": \"Hubo un problema al iniciar sesión\"\n}",
           "type": "json"
         },
         {
-          "title": "HTTP/1.1 403 Forbidden",
+          "title": "HTTP/1.1 403 Forbidden - case 1",
           "content": "{\n  \"code\": {\n    ...error data\n  },\n  \"message\": \"El usuario o contraseña son incorrectos\"\n}",
           "type": "json"
         },
         {
+          "title": "HTTP/1.1 403 Forbidden - case 2",
+          "content": "{\n  \"code\": {\n    ...error data\n  },\n  \"message\": \"El usuario ingresado no esta registrado\"\n}",
+          "type": "json"
+        },
+        {
           "title": "HTTP/1.1 500 Internal Server Error",
-          "content": "{\n  \"code\": {\n    ...error data\n  },\n  \"message\": \"Upps hubo un problema al iniciar sesión\"\n}",
+          "content": "{\n  \"code\": {\n    ...error data\n  },\n  \"message\": \"Hubo un problema al iniciar sesión\"\n}",
           "type": "json"
         }
       ]
@@ -230,7 +235,7 @@
       "examples": [
         {
           "title": "HTTP/1.1 400 Bad Request",
-          "content": "{\n  \"code\": \"Faltan parametros para hacer la petición\",\n  \"message\": \"Upps hubo un problema al registrar al usuario\"\n}",
+          "content": "{\n  \"code\": \"Faltan parametros para hacer la petición\",\n  \"message\": \"Hubo un problema al registrar al usuario\"\n}",
           "type": "json"
         },
         {
@@ -240,7 +245,7 @@
         },
         {
           "title": "HTTP/1.1 500 Internal Server Error",
-          "content": "{\n  \"code\": {\n    ...error data\n  },\n  \"message\": \"Upps hubo un problema al registrar al usuario\"\n}",
+          "content": "{\n  \"code\": {\n    ...error data\n  },\n  \"message\": \"Hubo un problema al registrar al usuario\"\n}",
           "type": "json"
         }
       ]
@@ -248,5 +253,64 @@
     "filename": "src/services/login.rest.ts",
     "groupTitle": "Login",
     "name": "PostRegisteruser"
+  },
+  {
+    "type": "delete",
+    "url": "/deleteNotification",
+    "title": "deleteNotification",
+    "version": "0.0.1",
+    "group": "Notification",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Id del usuario al que pertenece la notificación</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "notifyId",
+            "description": "<p>Id de la notificación a eleminar</p>"
+          }
+        ]
+      }
+    },
+    "description": "<p>Servicio para eliminar la notificacion de un usuario</p>",
+    "success": {
+      "examples": [
+        {
+          "title": "HTTP/1.1 200 OK",
+          "content": "{\n  \"message\": \"La notificacion fue eliminada de manera satisfactoria\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "HTTP/1.1 400 Bad Request",
+          "content": "{\n  \"code\": \"Faltan parametros para hacer la petición\",\n  \"message\": \"Hubo un problema al eliminar la notificación\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "HTTP/1.1 403 Forbidden",
+          "content": "{\n  \"code\": \"El id de usuario o de la notificacion no se encontro\",\n  \"message\": \"Hubo un problema al eliminar la notificación\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "HTTP/1.1 500 Internal Server Error",
+          "content": "{\n  \"code\": {\n    ...error data\n  },\n  \"message\": \"Hubo un problema al eliminar la notificación\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/services/notification.res.ts",
+    "groupTitle": "Notification",
+    "name": "DeleteDeletenotification"
   }
 ]

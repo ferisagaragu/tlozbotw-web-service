@@ -284,8 +284,8 @@
     "success": {
       "examples": [
         {
-          "title": "HTTP/1.1 200 OK",
-          "content": "{\n  \"message\": \"La notificacion fue eliminada de manera satisfactoria\"\n}",
+          "title": "HTTP/1.1 201 OK",
+          "content": "{\n  \"data\": \"La notificacion fue eliminada de manera satisfactoria\"\n}",
           "type": "json"
         }
       ]
@@ -312,5 +312,87 @@
     "filename": "src/services/notification.res.ts",
     "groupTitle": "Notification",
     "name": "DeleteDeletenotification"
+  },
+  {
+    "type": "post",
+    "url": "/createNotification",
+    "title": "createNotification",
+    "version": "0.0.1",
+    "group": "Notification",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Id del usuario al que pertenece la notificación</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "icon",
+            "description": "<p>Tipo de icono a mostrar info, error y warning</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "link",
+            "description": "<p>El link es para revincular al usuario a algún punto de la pagína (Este campo es opcional)</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>El mensaje que se va comunicar al usuario</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "title",
+            "description": "<p>El titulo de la notificación</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"id\":\"Target user id\",\n  \"icon\": \"info | error | warning\",\n  \"link\": \"your app link\",\n  \"message\": \"your message\",\n  \"title\": \"your title\"\t\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "description": "<p>Servicio para crear una nueva notificación para un usuario</p>",
+    "success": {
+      "examples": [
+        {
+          "title": "HTTP/1.1 200 OK",
+          "content": "{\n  \"data\": \"La notificación fue creada\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "HTTP/1.1 400 Bad Request",
+          "content": "{\n  \"code\": \"Faltan parametros para hacer la petición\",\n  \"message\": \"Hubo un problema al crear la notificación\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "HTTP/1.1 500 Internal Server Error",
+          "content": "{\n  \"code\": {\n    ...error data\n  },\n  \"message\": \"Hubo un problema al crear la notificación\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/services/notification.res.ts",
+    "groupTitle": "Notification",
+    "name": "PostCreatenotification"
   }
 ]

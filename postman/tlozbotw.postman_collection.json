@@ -138,7 +138,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3400/deleteNotification?id=qd9HwvPIO2a0XtxV1Rl9aeBKAqh2&notifyId=2",
+							"raw": "http://localhost:3400/deleteNotification?id=qd9HwvPIO2a0XtxV1Rl9aeBKAqh2&notifyId=1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -154,8 +154,48 @@
 								},
 								{
 									"key": "notifyId",
-									"value": "2"
+									"value": "1"
 								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createNotification",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRGF0YSI6eyJ1aWQiOiJiN0daWHFrU1FLYm1lbkx1M2hyQ1J5SERldWUyIiwiZW1haWwiOiJmZXJpc2FnYXJhZ3VAZ21haWwuY29tIiwibmFtZSI6InlvdXIgbmFtZSIsInBvdGhvIjoieW91ciB1cmwgcGhvdG8ifSwiaWF0IjoxNTY2MzQxNTczLCJleHAiOjE1OTc4Nzc1NzN9.oCTE3FaCLbOKky1vDL-T_PTL8wljQb9u-JO29iWgKIM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\":\"zmqixDaO5xQS7lfq4tZUfRFUHDY2\",\n\t\"icon\": \"info\",\n\t\"link\": \"\",\n\t\"message\": \"Tu cuenta es de usuario administrado el contenido se mostrara diferente para ti.\",\n\t\"title\": \"Bienvenido administrador\"\t\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3400/createNotification",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3400",
+							"path": [
+								"createNotification"
 							]
 						}
 					},

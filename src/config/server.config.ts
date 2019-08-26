@@ -13,6 +13,7 @@ router.use(bodyParser.urlencoded({ extended: false }));
 router.use((req, res, next) => {
   res.header("Content-Type" ,"application/json");
   res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "*")
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
   next();
 });

@@ -16,6 +16,7 @@ export function init() {
 
   //NOTIFICATION
   notificationRest.deleteNotification();
+  notificationRest.createNotification();
 
   //BOW
   bowRest.getBows();

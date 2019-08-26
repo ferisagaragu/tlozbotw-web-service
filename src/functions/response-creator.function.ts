@@ -14,18 +14,22 @@ class ResponseCreator {
   //SUCCESS
   public _200(resp: any, data: any, length?: number, message?: string) {
     resp.status(200);
+    const respOut: any = { };
+
     if (length == 0) {
-      resp.send({
-        message,
-        data
-      });
+      respOut.message = message;
+      respOut.data = data;
     } else {
-      resp.send({
-        length,
-        message,
-        data
-      });
+      respOut.length = length;
+      respOut.message = message;
+      respOut.data = data;
     } 
+
+    if (!data) {
+      delete respOut['data'];
+    }
+
+    resp.send(respOut);
   }
 
   public _201(resp: any, data?: any, message?: string) {

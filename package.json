@@ -5,7 +5,7 @@
   "main": "apidoc/index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "tsc-watch --onSuccess \"node ./dist/server.js\"",
+    "start": "tsc-watch --onSuccess \"node ./dist/server.js\"",
     "doc": "apidoc -i src/services -o apidoc/",
     "predeploy": "apidoc -i src/services -o apidoc/",
     "deploy-doc": "apidoc -i src/services -o apidoc/ && gh-pages -d apidoc"

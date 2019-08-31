@@ -57,7 +57,8 @@ CREATE TABLE `bow`
   `name` varchar(200),
   `damage` varchar(20),
   `description` varchar(500),
-  `img` varchar(500)
+  `img` varchar(500),
+  `available` boolean DEFAULT 1
 );
 
 CREATE TABLE `users_weapon`

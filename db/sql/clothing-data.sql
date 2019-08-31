@@ -1,11 +1,11 @@
-use tlozbotw;
-
 /*
 -- Query: SELECT * FROM tlozbotw.clothing
 LIMIT 0, 2000
 
 -- Date: 2019-08-07 22:50
 */
+use tlozbotw;
+
 INSERT INTO `clothing` (`id`,`zone`,`defending`,`effect`,`name`,`dlc`,`amiibo`,`bonus`,`img`) VALUES (1,'Cabeza.',2,'Acelera los movimientos laterales al escalar.','Capucha de Ravio',0,0,'0','https://vignette.wikia.nocookie.net/zelda/images/5/54/Capucha_de_Ravio.png/revision/latest/scale-to-width-down/40?cb=20180713194118&path-prefix=es');
 INSERT INTO `clothing` (`id`,`zone`,`defending`,`effect`,`name`,`dlc`,`amiibo`,`bonus`,`img`) VALUES (2,'Cabeza.',7,'Resistencia ancestral.','Casco de Midna',0,0,'0','https://vignette.wikia.nocookie.net/zelda/images/1/1b/Casco_de_Midna.png/revision/latest/scale-to-width-down/45?cb=20180713194652&path-prefix=es');
 INSERT INTO `clothing` (`id`,`zone`,`defending`,`effect`,`name`,`dlc`,`amiibo`,`bonus`,`img`) VALUES (3,'Cabeza.',3,'Anticongelación.','Casco de Zant',0,0,'0','https://vignette.wikia.nocookie.net/zelda/images/4/4c/Casco_de_Zant_BotW.png/revision/latest/scale-to-width-down/45?cb=20180716002951&path-prefix=es');

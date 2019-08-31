@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "0ff42717-4f99-4623-901c-8f4f25fdc35e",
+		"_postman_id": "0339293f-ed61-4db8-be44-08bb01212f6c",
 		"name": "tlozbotw",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -16,19 +16,13 @@
 							{
 								"key": "Content-Type",
 								"name": "Content-Type",
-								"value": "application/x-www-form-urlencoded",
+								"value": "application/json",
 								"type": "text"
 							}
 						],
 						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "data",
-									"value": "{\n \"idUser\":\"FNfi3a5O8sNOI7B3v1HOoCBckOE2\",\n  \"idClothing\": 2\n}",
-									"type": "text"
-								}
-							]
+							"mode": "raw",
+							"raw": "{\n\t\"email\":\"ferisagaragu@gmail.com\",\n\t\"password\":\"1234//\"\n}"
 						},
 						"url": {
 							"raw": "http://localhost:3400/login",
@@ -43,21 +37,49 @@
 						}
 					},
 					"response": []
-				}
-			]
-		},
-		{
-			"name": "clothing",
-			"item": [
+				},
 				{
-					"name": "getClothing",
+					"name": "registerUser",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"ferisagaragu@gmail.com\",\r\n    \"password\": \"1234//\",\r\n    \"name\": \"Fernando Garcia\",\r\n    \"potho\": \"https://upload.wikimedia.org/wikipedia/commons/d/d3/User_Circle.png\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3400/registerUser",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3400",
+							"path": [
+								"registerUser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getUsers",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxfSwiaWF0IjoxNTY1Mjc3NzE1LCJleHAiOjE1NjUyOTU3MTV9.rusonkLp_2f3yxA3pO0DSAS1Wz9n03Nt81MZ-pIrIhc",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRGF0YSI6eyJ1aWQiOiJiN0daWHFrU1FLYm1lbkx1M2hyQ1J5SERldWUyIiwiZW1haWwiOiJmZXJpc2FnYXJhZ3VAZ21haWwuY29tIiwibmFtZSI6InlvdXIgbmFtZSIsInBvdGhvIjoieW91ciB1cmwgcGhvdG8ifSwiaWF0IjoxNTY2MzQxNTczLCJleHAiOjE1OTc4Nzc1NzN9.oCTE3FaCLbOKky1vDL-T_PTL8wljQb9u-JO29iWgKIM",
 									"type": "string"
 								}
 							]
@@ -69,28 +91,70 @@
 								"name": "Content-Type",
 								"value": "application/x-www-form-urlencoded",
 								"type": "text"
-							},
-							{
-								"key": "",
-								"value": "",
-								"type": "text",
-								"disabled": true
 							}
 						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
 						"url": {
-							"raw": "http://localhost:3400/getClothing?id=FNfi3a5O8sNOI7B3v1HOoCBckOE2",
+							"raw": "http://localhost:3400/getUsers?id=7ewYFPWBM6NyhPulPgOeJBr3HBW2",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3400",
 							"path": [
-								"getClothing"
+								"getUsers"
 							],
 							"query": [
 								{
 									"key": "id",
-									"value": "FNfi3a5O8sNOI7B3v1HOoCBckOE2"
+									"value": "7ewYFPWBM6NyhPulPgOeJBr3HBW2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "notification",
+			"item": [
+				{
+					"name": "deleteNotification",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRGF0YSI6eyJ1aWQiOiJiN0daWHFrU1FLYm1lbkx1M2hyQ1J5SERldWUyIiwiZW1haWwiOiJmZXJpc2FnYXJhZ3VAZ21haWwuY29tIiwibmFtZSI6InlvdXIgbmFtZSIsInBvdGhvIjoieW91ciB1cmwgcGhvdG8ifSwiaWF0IjoxNTY2MzQxNTczLCJleHAiOjE1OTc4Nzc1NzN9.oCTE3FaCLbOKky1vDL-T_PTL8wljQb9u-JO29iWgKIM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3400/deleteNotification?id=qd9HwvPIO2a0XtxV1Rl9aeBKAqh2&notifyId=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3400",
+							"path": [
+								"deleteNotification"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "qd9HwvPIO2a0XtxV1Rl9aeBKAqh2"
+								},
+								{
+									"key": "notifyId",
+									"value": "1"
 								}
 							]
 						}
@@ -98,14 +162,14 @@
 					"response": []
 				},
 				{
-					"name": "createOrUpdateClothing",
+					"name": "createNotification",
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxfSwiaWF0IjoxNTY1Mjc3NzE1LCJleHAiOjE1NjUyOTU3MTV9.rusonkLp_2f3yxA3pO0DSAS1Wz9n03Nt81MZ-pIrIhc",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRGF0YSI6eyJ1aWQiOiJiN0daWHFrU1FLYm1lbkx1M2hyQ1J5SERldWUyIiwiZW1haWwiOiJmZXJpc2FnYXJhZ3VAZ21haWwuY29tIiwibmFtZSI6InlvdXIgbmFtZSIsInBvdGhvIjoieW91ciB1cmwgcGhvdG8ifSwiaWF0IjoxNTY2MzQxNTczLCJleHAiOjE1OTc4Nzc1NzN9.oCTE3FaCLbOKky1vDL-T_PTL8wljQb9u-JO29iWgKIM",
 									"type": "string"
 								}
 							]
@@ -115,75 +179,152 @@
 							{
 								"key": "Content-Type",
 								"name": "Content-Type",
-								"value": "application/x-www-form-urlencoded",
+								"value": "application/json",
 								"type": "text"
 							}
 						],
 						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "data",
-									"value": "{\n    \"idUser\": \"FNfi3a5O8sNOI7B3v1HOoCBckOE2\",\n    \"idClothing\": 2,\n    \"check\": 1,\n    \"levelP\": 0\n}",
-									"type": "text"
-								}
-							]
+							"mode": "raw",
+							"raw": "{\n\t\"id\":\"zmqixDaO5xQS7lfq4tZUfRFUHDY2\",\n\t\"icon\": \"info\",\n\t\"link\": \"\",\n\t\"message\": \"Tu cuenta es de usuario administrado el contenido se mostrara diferente para ti.\",\n\t\"title\": \"Bienvenido administrador\"\t\n}"
 						},
 						"url": {
-							"raw": "http://localhost:3400/createOrUpdateClothing",
+							"raw": "http://localhost:3400/createNotification",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3400",
 							"path": [
-								"createOrUpdateClothing"
+								"createNotification"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "bow",
+			"item": [
+				{
+					"name": "getBows",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3400/getBows?id=zmqixDaO5xQS7lfq4tZUfRFUHDY2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3400",
+							"path": [
+								"getBows"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "zmqixDaO5xQS7lfq4tZUfRFUHDY2"
+								}
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "deleteRegistClothing",
+					"name": "updateBow",
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxfSwiaWF0IjoxNTY1Mjk1ODE5LCJleHAiOjE1NjUzMTM4MTl9.pqVDHDsDQMOpHnMIXPKTTkntFv2P1uZ6C8EqFccYLMA",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRGF0YSI6eyJ1aWQiOiJiN0daWHFrU1FLYm1lbkx1M2hyQ1J5SERldWUyIiwiZW1haWwiOiJmZXJpc2FnYXJhZ3VAZ21haWwuY29tIiwibmFtZSI6InlvdXIgbmFtZSIsInBvdGhvIjoieW91ciB1cmwgcGhvdG8ifSwiaWF0IjoxNTY2MzQxNTczLCJleHAiOjE1OTc4Nzc1NzN9.oCTE3FaCLbOKky1vDL-T_PTL8wljQb9u-JO29iWgKIM",
 									"type": "string"
 								}
 							]
 						},
-						"method": "DELETE",
+						"method": "PUT",
 						"header": [
 							{
 								"key": "Content-Type",
 								"name": "Content-Type",
-								"value": "application/x-www-form-urlencoded",
+								"value": "application/json",
 								"type": "text"
 							}
 						],
 						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "data",
-									"value": "{\n    \"idUser\": \"FNfi3a5O8sNOI7B3v1HOoCBckOE2\",\n    \"idClothing\": 2\n}",
-									"type": "text"
-								}
-							]
+							"mode": "raw",
+							"raw": "{\t\n\t\"id\": 1,\n\t\"name\": \"Soy un nombre\",\n\t\"damage\": \"Soy el daño\",\n\t\"description\": \"Soy la descripcion\",\n\t\"img\": \"imagen\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:3400/deleteRegistClothing",
+							"raw": "http://localhost:3400/updateBow",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3400",
 							"path": [
-								"deleteRegistClothing"
+								"updateBow"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createBow",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRGF0YSI6eyJ1aWQiOiJiN0daWHFrU1FLYm1lbkx1M2hyQ1J5SERldWUyIiwiZW1haWwiOiJmZXJpc2FnYXJhZ3VAZ21haWwuY29tIiwibmFtZSI6InlvdXIgbmFtZSIsInBvdGhvIjoieW91ciB1cmwgcGhvdG8ifSwiaWF0IjoxNTY2MzQxNTczLCJleHAiOjE1OTc4Nzc1NzN9.oCTE3FaCLbOKky1vDL-T_PTL8wljQb9u-JO29iWgKIM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\t\n\t\"name\": \"Soy un nombre\",\n\t\"damage\": \"Soy el daño\",\n\t\"description\": \"Soy la descripcion\",\n\t\"img\": \"imagen\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3400/createBow",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3400",
+							"path": [
+								"createBow"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteBow",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3400/deleteBow",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3400",
+							"path": [
+								"deleteBow"
 							]
 						}
 					},

@@ -1,0 +1,25 @@
+[ {
+  "icon" : "info",
+  "link" : "",
+  "message" : "Bienvenido a la guía tlozbotw, como administrador veras otro tipo de ventanas diferentes a las de un usuario comun",
+  "see" : false,
+  "title" : "Bienvenido"
+}, {
+  "icon" : "error",
+  "link" : "",
+  "message" : "Bienvenido a la guía tlozbotw, como administrador veras otro tipo de ventanas diferentes a las de un usuario comun",
+  "see" : false,
+  "title" : "Bienvenido"
+}, {
+  "icon" : "warning",
+  "link" : "",
+  "message" : "Bienvenido a la guía tlozbotw, como administrador veras otro tipo de ventanas diferentes a las de un usuario comun",
+  "see" : false,
+  "title" : "Bienvenido"
+}, {
+  "icon" : "info",
+  "link" : "",
+  "message" : "Bienvenido a la guía tlozbotw, como administrador veras otro tipo de ventanas diferentes a las de un usuario comun",
+  "see" : false,
+  "title" : "Bienvenido"
+}]

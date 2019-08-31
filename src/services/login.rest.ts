@@ -1,6 +1,7 @@
 import firebase from '../config/firebase.config';
-import { auth, get, noVerifyGet } from '../functions/auth.fuction';
+import { auth, noVerifyGet, get } from '../functions/auth.fuction';
 import ResponseCreator from '../functions/response-creator.function';
+import { connection } from '../config/mysql-connector.confing';
 
 class LoginRest {
 
@@ -8,16 +9,15 @@ class LoginRest {
     noVerifyGet('/devToken', (req: any, resp: any) => {
       resp.status(200);
       resp.send(
-                'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.' +
-                'eyJ1c2VyRGF0YSI6eyJ1aWQiOiJiN0daWHFrU1FLYm1' +
-                'lbkx1M2hyQ1J5SERldWUyIiwiZW1haWwiOiJmZXJpc2' +
-                'FnYXJhZ3VAZ21haWwuY29tIiwibmFtZSI6InlvdXIgb' +
-                'mFtZSIsInBvdGhvIjoieW91ciB1cmwgcGhvdG8ifSwi' +
-                'aWF0IjoxNTY2MzQxNTczLCJleHAiOjE1OTc4Nzc1NzN9' +
-                '.oCTE3FaCLbOKky1vDL-T_PTL8wljQb9u-JO29iWgKIM'
-              );
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.' +
+        'eyJ1c2VyRGF0YSI6eyJ1aWQiOiJiN0daWHFrU1FLYm1' +
+        'lbkx1M2hyQ1J5SERldWUyIiwiZW1haWwiOiJmZXJpc2' + 
+        'FnYXJhZ3VAZ21haWwuY29tIiwibmFtZSI6InlvdXIgb' +
+        'mFtZSIsInBvdGhvIjoieW91ciB1cmwgcGhvdG8ifSwi' +
+        'aWF0IjoxNTY2MzQxNTczLCJleHAiOjE1OTc4Nzc1NzN9' +
+        '.oCTE3FaCLbOKky1vDL-T_PTL8wljQb9u-JO29iWgKIM'
+      );
     });
-      
   }
 
   /**
@@ -39,27 +39,35 @@ class LoginRest {
           "uid": "your id",
           "email": "your email",
           "name": "your name",
-          "potho": "your url photo"
+          "photo": "your url photo",
+          "role": your number role
         }
       }
     @apiErrorExample {json} HTTP/1.1 400 Bad Request
       {
         "code": "Faltan parametros para hacer la petición",
-        "message": "Upps hubo un problema al iniciar sesión"
+        "message": "Hubo un problema al iniciar sesión"
       }
-    @apiErrorExample {json} HTTP/1.1 403 Forbidden
+    @apiErrorExample {json} HTTP/1.1 403 Forbidden - case 1
       {
         "code": {
           ...error data
         },
         "message": "El usuario o contraseña son incorrectos"
       }
+    @apiErrorExample {json} HTTP/1.1 403 Forbidden - case 2
+      {
+        "code": {
+          ...error data
+        },
+        "message": "El usuario ingresado no esta registrado"
+      }
     @apiErrorExample {json} HTTP/1.1 500 Internal Server Error
       {
         "code": {
           ...error data
         },
-        "message": "Upps hubo un problema al iniciar sesión"
+        "message": "Hubo un problema al iniciar sesión"
       }
   */
   public login(): void {
@@ -71,40 +79,70 @@ class LoginRest {
         firebase.auth()
           .signInWithEmailAndPassword(email, password)
           .then((snapshot: any) => {
-            const userData = { 
-              uid: snapshot.user.uid,
-              email: snapshot.user.email,
-              name: 'your name',
-              potho: 'your url photo'
-            };
-            
-            //Falta aquí registrar la informacion en base de datos
-
-            resp.status(200);
-            resp.send({
-              token: jwt.sign({ userData }, secretKey, { expiresIn: '5h' }),
-              userData
+            connection.query(`call tlozbotw.getUser('${snapshot.user.uid}')`,(err, result) => {
+              if (err) {
+                response._500(
+                  resp,
+                  err,
+                  'Hubo un problema al iniciar sesión'
+                );
+                throw err;
+              }
+              if (result[0][0]) {
+                const { id, email, name, photo, role } = result[0][0];
+                
+                const userData = { 
+                  email, 
+                  uid: id,
+                  name,
+                  photo,
+                  role
+                };
+                
+                resp.status(200);
+                resp.send({
+                  token: jwt.sign({ userData }, secretKey, { expiresIn: '5h' }),
+                  userData
+                });
+              } else {
+                response._500(
+                  resp,
+                  'El usuario no esta registrado en la base de datos pero si en firebase',
+                  'Hubo un problema al iniciar sesión'
+                );
+              }
             });
           }).catch((error: any) => {
-            if (error.code === 'auth/wrong-password') {
-              response._403(
-                resp,
-                error,
-                'El usuario o contraseña son incorrectos'
-              );
-            } else {
-              response._500(
-                resp,
-                error,
-                'Upps hubo un problema al iniciar sesión'
-              );
+            switch(error.code) {
+              case 'auth/user-not-found': {
+                response._403(
+                  resp,
+                  error,
+                  'El usuario ingresado no esta registrado'
+                );
+              } break;
+
+              case 'auth/wrong-password': {
+                response._403(
+                  resp,
+                  error,
+                  'El usuario o contraseña son incorrectos'
+                );
+              } break;
+
+              default: 
+                response._500(
+                  resp,
+                  error,
+                  'Hubo un problema al iniciar sesión'
+                );
             }
           });
       } else {
         response._400(
           resp, 
           'Faltan parametros para hacer la petición',
-          'Upps hubo un problema al iniciar sesión'
+          'Hubo un problema al iniciar sesión'
         );
       }
     });
@@ -119,12 +157,12 @@ class LoginRest {
         "email": "your user",
         "password": "your password",
         "name": "your name",
-        "potho": "your url photo"
+        "photo": "your url photo"
       }
     @apiParam {String} email Correo de prueba: ferisagaragu@hotmail.com
     @apiParam {String} password Contraseña de prueba: 1234//
     @apiParam {String} name El nombre de prueba puede ser cualquiera (De preferencia ningun nombre grosero)
-    @apiParam {String} potho La foto de usuario puede ser cualquiera solo copia un url 
+    @apiParam {String} photo La foto de usuario puede ser cualquiera solo copia un url 
                              (De preferencia que sea contenido para toda la familia)
     @apiDescription Servicio para registar un nuevo usuario (Si el usuario ya estra registrado pide que lo borren)
     @apiSuccessExample {json} HTTP/1.1 200 OK
@@ -136,14 +174,15 @@ class LoginRest {
             "email": "your email",
             "uid": "your id",
             "name": "your name",
-            "potho": "your url photo"
+            "photo": "your url photo",
+            "role": your number role
           }
         }
       }
     @apiErrorExample {json} HTTP/1.1 400 Bad Request
       {
         "code": "Faltan parametros para hacer la petición",
-        "message": "Upps hubo un problema al registrar al usuario"
+        "message": "Hubo un problema al registrar al usuario"
       }
     @apiErrorExample {json} HTTP/1.1 403 Forbidden
       {
@@ -157,36 +196,47 @@ class LoginRest {
         "code": {
           ...error data
         },
-        "message": "Upps hubo un problema al registrar al usuario"
+        "message": "Hubo un problema al registrar al usuario"
       }
   */
   public registerUser(): void {
     auth('/registerUser', (req: any, resp: any, jwt: any, secretKey: string) => {
       const response: ResponseCreator = new ResponseCreator();
-      if ( req.body.email && req.body.password && req.body.name && req.body.potho ) {
-        const { email, password } = req.body;
+      if ( req.body.email && req.body.password && req.body.name && req.body.photo ) {
+        const { email, password, name, photo } = req.body;
 
         firebase.auth()
           .createUserWithEmailAndPassword(email, password)
           .then((snapshot: any) => {
-            const userData = { 
-              email: snapshot.user.email, 
-              uid: snapshot.user.uid,
-              name: 'your name',
-              potho: 'your url photo'
-            };
+            connection.query(`call tlozbotw.registerOrUpdateUser('${snapshot.user.uid}', '${snapshot.user.email}', '${name}', '${photo}', 0)`,(err, result) => {
+              if (err) {
+                response._500(
+                  resp,
+                  err,
+                  'Hubo un problema al registrar al usuario'
+                );
+                throw err;
+              }
+              const { id, email, name, photo, role } = result[0][0];
+              
+              const userData = { 
+                email, 
+                uid: id,
+                name,
+                photo,
+                role
+              };
 
-            //Falta aquí registrar la informacion en base de datos
-
-            response._200(
-              resp, 
-              {
-                token: jwt.sign({ userData }, secretKey, { expiresIn: '5h' }),
-                userData
-              },
-              0, 
-              `Usuario registrado con el correo ${userData.email}`
-            );
+              response._200(
+                resp, 
+                {
+                  token: jwt.sign({ userData }, secretKey, { expiresIn: '5h' }),
+                  userData
+                },
+                0, 
+                `Usuario registrado con el correo ${userData.email}`
+              );
+            });
           }).catch((error: any) => {
             if (error.code === 'auth/email-already-in-use') {
               response._403(
@@ -198,7 +248,7 @@ class LoginRest {
               response._500(
                 resp,
                 error,
-                'Upps hubo un problema al registrar al usuario'
+                'Hubo un problema al registrar al usuario'
               );
             }
           });
@@ -206,12 +256,92 @@ class LoginRest {
         response._400(
           resp, 
           'Faltan parametros para hacer la petición',
-          'Upps hubo un problema al registrar al usuario'
+          'Hubo un problema al registrar al usuario'
         );
       }
     });
   }
   
+  /**
+    @api {get} /getUsers getUsers
+    @apiVersion 0.0.1
+    @apiGroup Login
+    @apiParam {String} id Id de prueba: 7ewYFPWBM6NyhPulPgOeJBr3HBW2
+    @apiDescription Servicio para obtener un listado de todos los usuarios de el sistema 
+                    (este servicio solo puede ser consumido por un usuario administrador)
+    @apiSuccessExample {json} HTTP/1.1 200 OK
+      {
+        "length": 1,
+        "data": [
+          {
+            "id": "user id",
+            "email": "user email",
+            "name": "user name",
+            "photo": "user url photo",
+            "role": user role name
+          }
+        ]
+      }
+    @apiErrorExample {json} HTTP/1.1 400 Bad Request
+      {
+        "code": "Faltan parametros para hacer la petición",
+        "message": "Hubo un problema al obtener los usuarios"
+      }
+    @apiErrorExample {json} HTTP/1.1 403 Forbidden
+      {
+        "code": {
+          ...error data
+        },
+        "message": "Hubo un problema al obtener los usuarios"
+      }
+    @apiErrorExample {json} HTTP/1.1 500 Internal Server Error
+      {
+        "code": {
+          ...error data
+        },
+        "message": "Hubo un problema al obtener los usuarios"
+      }
+  */
+  public getUsers(): void {
+    get('/getUsers', (req: any, resp: any) => {
+      const response: ResponseCreator = new ResponseCreator();
+      if (req.query.id) {
+        const { id } = req.query;
+
+        connection.query(`call tlozbotw.getUsersData('${id}');`, (err, result) => {
+          if (err) {
+            response._500(
+              resp,
+              err,
+              'Hubo un problema al obtener los usuarios'
+            );
+            throw err;
+          }
+          
+          if (result[0]) {
+            response._200(
+              resp,
+              result[0],
+              result[0].length
+            );
+          } else {
+            response._403(
+              resp,
+              'El rol del usuario no esta autorizado',
+              'Hubo un problema al obtener los usuarios'
+            );
+          }
+        });
+
+      } else {
+        response._400(
+          resp, 
+          'Faltan parametros para hacer la petición',
+          'Hubo un problema al obtener los usuarios'
+        );
+      }
+    });
+  }
 }
 
 export default LoginRest;

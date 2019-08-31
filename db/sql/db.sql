@@ -55,9 +55,10 @@ CREATE TABLE `bow`
 (
   `id` int PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `name` varchar(200),
-  `damage` int,
+  `damage` varchar(20),
   `description` varchar(500),
-  `img` varchar(500)
+  `img` varchar(500),
+  `available` boolean DEFAULT 1
 );
 
 CREATE TABLE `users_weapon`

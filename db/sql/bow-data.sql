@@ -4,6 +4,8 @@ LIMIT 0, 2000
 
 -- Date: 2019-08-08 16:20
 */
+use tlozbotw;
+
 INSERT INTO `bow` (`id`,`name`,`damage`,`description`,`img`) VALUES (1,'Arco ancestral','44','Arco elaborado con tecnología sheikah gracias a la investigación de Rotver. Dispara flechas que describen una trayectoria recta.','https://vignette.wikia.nocookie.net/zelda/images/a/a6/Ancient-bow.png/revision/latest/scale-to-width-down/65?cb=20180705172306&path-prefix=es');
 INSERT INTO `bow` (`id`,`name`,`damage`,`description`,`img`) VALUES (2,'Arco bestial','20 x3','Arco de centaleón con estructura reforzada. La cuerda también es metálica, por lo que a los hylianos de a pie les cuesta utilizarlo.','https://vignette.wikia.nocookie.net/zelda/images/8/85/Arco_bestial.png/revision/latest/scale-to-width-down/65?cb=20180705175409&path-prefix=es');
 INSERT INTO `bow` (`id`,`name`,`damage`,`description`,`img`) VALUES (3,'Arco boko','4','Arco sencillo que emplean los bokoblin. Está elaborado con la primera rama y cuerda que tienen a la mano, por lo que no cabe esperar de él una gran potencia de disparo.','https://vignette.wikia.nocookie.net/zelda/images/1/1e/Arco_Boko_BotW.png/revision/latest/scale-to-width-down/65?cb=20170306134529&path-prefix=es');

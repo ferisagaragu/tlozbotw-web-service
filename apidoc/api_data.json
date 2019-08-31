@@ -1,5 +1,57 @@
 [
   {
+    "type": "delete",
+    "url": "/deleteBow",
+    "title": "deleteBow",
+    "version": "0.0.1",
+    "group": "Bows",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Id del arco que se va a eleminar</p>"
+          }
+        ]
+      }
+    },
+    "description": "<p>Servicio para eliminar un arco</p>",
+    "success": {
+      "examples": [
+        {
+          "title": "HTTP/1.1 200 OK",
+          "content": "{\n  \"message\": \"El arco ha sido eliminado!\",\n  \"data\": [\n    {\n      \"id\": bow id,\n      \"name\": \"bow name\",\n      \"damage\": \"bow damage\",\n      \"description\": \"bow description\",\n      \"img\": \"bow img\"\n    },\n    ...\n  ]\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "HTTP/1.1 400 Bad Request",
+          "content": "{\n  \"code\": \"Faltan parametros para hacer la petición\",\n  \"message\": \"Hubo un problema al eliminar el arco\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "HTTP/1.1 403 Forbidden",
+          "content": "{\n  \"code\": {\n    mySQL throw error\n  },\n  \"message\": \"Hubo un problema al eliminar el arco\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "HTTP/1.1 500 Internal Server Error",
+          "content": "{\n  \"code\": {\n    ...error data\n  },\n  \"message\": \"Hubo un problema al eliminar el arco\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/services/bow.rest.ts",
+    "groupTitle": "Bows",
+    "name": "DeleteDeletebow"
+  },
+  {
     "type": "get",
     "url": "/getbows",
     "title": "getBows",
@@ -32,17 +84,17 @@
       "examples": [
         {
           "title": "HTTP/1.1 400 Bad Request",
-          "content": "{\n  \"code\": \"Faltan parametros para hacer la petición\",\n  \"message\": \"Upps hubo un problema al obtener los datos\"\n}",
+          "content": "{\n  \"code\": \"Faltan parametros para hacer la petición\",\n  \"message\": \"Hubo un problema al obtener los datos\"\n}",
           "type": "json"
         },
         {
           "title": "HTTP/1.1 403 Forbidden",
-          "content": "{\n  \"code\": {\n    mySQL throw error\n  },\n  \"message\": \"Upps hubo un problema al obtener los datos\"\n}",
+          "content": "{\n  \"code\": {\n    mySQL throw error\n  },\n  \"message\": \"Hubo un problema al obtener los datos\"\n}",
           "type": "json"
         },
         {
           "title": "HTTP/1.1 500 Internal Server Error",
-          "content": "{\n  \"code\": {\n    ...error data\n  },\n  \"message\": \"Upps hubo un problema al obtener los datos\"\n}",
+          "content": "{\n  \"code\": {\n    ...error data\n  },\n  \"message\": \"Hubo un problema al obtener los datos\"\n}",
           "type": "json"
         }
       ]
@@ -50,6 +102,173 @@
     "filename": "src/services/bow.rest.ts",
     "groupTitle": "Bows",
     "name": "GetGetbows"
+  },
+  {
+    "type": "post",
+    "url": "/createBow",
+    "title": "createBow",
+    "version": "0.0.1",
+    "group": "Bows",
+    "parameter": {
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\t\n  \"name\": \"Soy un nombre\",\n  \"damage\": \"Soy el daño\",\n  \"description\": \"Soy la descripcion\",\n  \"img\": \"imagen\"\n}",
+          "type": "json"
+        }
+      ],
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>Nombre del arco que se va a crear</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "damage",
+            "description": "<p>Daño del arco que se va a crear</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "description",
+            "description": "<p>Descripción del arco que se va a crear</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "img",
+            "description": "<p>Url de la imagen del arco que se va a crear</p>"
+          }
+        ]
+      }
+    },
+    "description": "<p>Servicio para crear arcos</p>",
+    "success": {
+      "examples": [
+        {
+          "title": "HTTP/1.1 200 OK",
+          "content": "{\n  \"message\": \"El arco 'bow name created' ha sido creado!\",\n  \"data\": [\n    {\n      \"id\": bow id,\n      \"name\": \"bow name\",\n      \"damage\": \"bow damage\",\n      \"description\": \"bow description\",\n      \"img\": \"bow img\"\n    },\n    ...\n  ]\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "HTTP/1.1 400 Bad Request",
+          "content": "{\n  \"code\": \"Faltan parametros para hacer la petición\",\n  \"message\": \"Hubo un problema al crear el arco\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "HTTP/1.1 403 Forbidden",
+          "content": "{\n  \"code\": {\n    mySQL throw error\n  },\n  \"message\": \"Hubo un problema al crear el arco\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "HTTP/1.1 500 Internal Server Error",
+          "content": "{\n  \"code\": {\n    ...error data\n  },\n  \"message\": \"Hubo un problema al crear el arco\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/services/bow.rest.ts",
+    "groupTitle": "Bows",
+    "name": "PostCreatebow"
+  },
+  {
+    "type": "put",
+    "url": "/updateBow",
+    "title": "updateBow",
+    "version": "0.0.1",
+    "group": "Bows",
+    "parameter": {
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"id\": bow id,\n  \"name\": \"bow name\",\n  \"damage\": \"bow damage\",\n  \"description\": \"bow description\",\n  \"img\": \"bow imagen\"\n}",
+          "type": "json"
+        }
+      ],
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Integer",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Id del arco que se va a editar</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>Nombre del arco que se va a editar</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "damage",
+            "description": "<p>Daño del arco que se va a editar</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "description",
+            "description": "<p>Descripción del arco que se va a editar</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "img",
+            "description": "<p>Url de la imagen del arco que se va a editar</p>"
+          }
+        ]
+      }
+    },
+    "description": "<p>Servicio para actualizar un arco</p>",
+    "success": {
+      "examples": [
+        {
+          "title": "HTTP/1.1 201 OK",
+          "content": "{\n  \"message\": \"El arco 'bow name updated' ha sido actualizado!\",\n  \"data\": [\n    {\n      \"id\": bow id,\n      \"name\": \"bow name\",\n      \"damage\": \"bow damage\",\n      \"description\": \"bow description\",\n      \"img\": \"bow img\"\n    },\n    ...\n  ]\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "HTTP/1.1 400 Bad Request",
+          "content": "{\n  \"code\": \"Faltan parametros para hacer la petición\",\n  \"message\": \"Hubo un problema al actualizar el arco\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "HTTP/1.1 403 Forbidden",
+          "content": "{\n  \"code\": {\n    mySQL throw error\n  },\n  \"message\": \"Hubo un problema al actualizar el arco\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "HTTP/1.1 500 Internal Server Error",
+          "content": "{\n  \"code\": {\n    ...error data\n  },\n  \"message\": \"Hubo un problema al actualizar el arco\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/services/bow.rest.ts",
+    "groupTitle": "Bows",
+    "name": "PutUpdatebow"
   },
   {
     "type": "get",

@@ -20,4 +20,7 @@ export function init() {
 
   //BOW
   bowRest.getBows();
+  bowRest.createBow();
+  bowRest.updateBow();
+  bowRest.deleteBow();
 }

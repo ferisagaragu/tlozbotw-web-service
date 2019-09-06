@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "0339293f-ed61-4db8-be44-08bb01212f6c",
+		"_postman_id": "9c00fab9-6888-475f-aa04-a3321b859bce",
 		"name": "tlozbotw",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -325,6 +325,46 @@
 							"port": "3400",
 							"path": [
 								"deleteBow"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "material",
+			"item": [
+				{
+					"name": "getMaterial",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyRGF0YSI6eyJ1aWQiOiJiN0daWHFrU1FLYm1lbkx1M2hyQ1J5SERldWUyIiwiZW1haWwiOiJmZXJpc2FnYXJhZ3VAZ21haWwuY29tIiwibmFtZSI6InlvdXIgbmFtZSIsInBvdGhvIjoieW91ciB1cmwgcGhvdG8ifSwiaWF0IjoxNTY2MzQxNTczLCJleHAiOjE1OTc4Nzc1NzN9.oCTE3FaCLbOKky1vDL-T_PTL8wljQb9u-JO29iWgKIM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3400/getMaterial?id=B5UaPBKkOHYHTznm3MAKL51aZpl1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3400",
+							"path": [
+								"getMaterial"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "B5UaPBKkOHYHTznm3MAKL51aZpl1"
+								}
 							]
 						}
 					},

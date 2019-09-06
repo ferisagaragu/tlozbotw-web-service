@@ -1,10 +1,12 @@
 import LoginRest from "./login.rest";
 import NotificationRest from "./notification.res";
 import BowRest from "./bow.rest";
+import MaterialRest from "./material.rest";
 
 const loginRest = new LoginRest();
 const notificationRest = new NotificationRest();
 const bowRest = new BowRest();
+const materialRest = new MaterialRest();
 
 export function init() {
   //LOGIN
@@ -23,4 +25,7 @@ export function init() {
   bowRest.createBow();
   bowRest.updateBow();
   bowRest.deleteBow();
+
+  //MATERIAL
+  materialRest.getMaterial();
 }

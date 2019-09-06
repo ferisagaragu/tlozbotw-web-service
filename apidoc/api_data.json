@@ -474,6 +474,58 @@
     "name": "PostRegisteruser"
   },
   {
+    "type": "get",
+    "url": "/getMaterial",
+    "title": "getMaterial",
+    "version": "0.0.1",
+    "group": "Material",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Id del usuario del que se obtendran los materiales</p>"
+          }
+        ]
+      }
+    },
+    "description": "<p>Servicio para obtener materiales dependiendo del id del usuario</p>",
+    "success": {
+      "examples": [
+        {
+          "title": "HTTP/1.1 200 OK",
+          "content": "{\n  \"length\": material length,\n  \"data\": [\n    {\n      \"id\": material id,\n      \"name\": \"material name\",\n      \"pe\": \"material pe\",\n      \"power\": \"material power\",\n      \"location\": \"material location\",\n      \"description\": \"material description\",\n      \"img\": \"material img\",\n      \"check\": true | false\n    } \n    ...\n  ]\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "HTTP/1.1 400 Bad Request",
+          "content": "{\n  \"code\": \"Faltan parametros para hacer la petición\",\n  \"message\": \"Hubo un problema al obtener los datos\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "HTTP/1.1 403 Forbidden",
+          "content": "{\n  \"code\": {\n    mySQL throw error\n  },\n  \"message\": \"Hubo un problema al obtener los datos\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "HTTP/1.1 500 Internal Server Error",
+          "content": "{\n  \"code\": {\n    ...error data\n  },\n  \"message\": \"Hubo un problema al obtener los datos\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/services/material.rest.ts",
+    "groupTitle": "Material",
+    "name": "GetGetmaterial"
+  },
+  {
     "type": "delete",
     "url": "/deleteNotification",
     "title": "deleteNotification",

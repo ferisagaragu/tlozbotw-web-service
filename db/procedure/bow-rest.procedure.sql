@@ -49,7 +49,8 @@ DELIMITER ;
 DELIMITER //
 create procedure deleteBow(in idIn int) 
 begin
-  DELETE FROM `tlozbotw`.`bow` WHERE (`id` = idIn);
+  update `tlozbotw`.`bow` SET
+  `available` = 0 WHERE `id` = idIn;
   
   SELECT id, name, damage, description, img 
   FROM tlozbotw.bow where available = 1;

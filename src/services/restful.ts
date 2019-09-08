@@ -28,4 +28,7 @@ export function init() {
 
   //MATERIAL
   materialRest.getMaterial();
+  materialRest.createMaterial();
+  materialRest.updateMaterial();
+  materialRest.deleteMaterial();
 }

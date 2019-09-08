@@ -526,6 +526,281 @@ define({ "api": [
     "name": "GetGetmaterial"
   },
   {
+    "type": "post",
+    "url": "/createMaterial",
+    "title": "createMaterial",
+    "version": "0.0.1",
+    "group": "Material",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>Nombre del material que se va a crear</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "pe",
+            "description": "<p>Puntos de vida del material que se va a crear</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "power",
+            "description": "<p>Poder del material que se va a crear</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "duration",
+            "description": "<p>Duración del material que se va a crear</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "location",
+            "description": "<p>Locación del material que se va a crear</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "description",
+            "description": "<p>Descripción del material que se va a crear</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "img",
+            "description": "<p>Imagen del material que se va a crear</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Int",
+            "optional": false,
+            "field": "idCategory",
+            "description": "<p>Id de la categoria del material que se va a crear</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"name\": \"new material name\",\n  \"pe\": \"new material  pe\",\n  \"power\": \"new material  power\",\n  \"duration\": \"new material  duration\",\n  \"location\": \"new material  location\",\n  \"description\": \"new material  description\",\n  \"img\": \"new material  image\",\n  \"idCategory\": 1 ...11 \n}",
+          "type": "json"
+        }
+      ]
+    },
+    "description": "<p>Servicio para crear un nuevo material</p>",
+    "success": {
+      "examples": [
+        {
+          "title": "HTTP/1.1 201 OK",
+          "content": "{\n  \"length\": material length,\n  \"data\": [\n    {\n      \"id\": material id,\n      \"name\": \"material name\",\n      \"pe\": \"material pe\",\n      \"power\": \"material power\",\n      \"duration\": \"material duration\",\n      \"location\": \"material location\",\n      \"description\": \"material description\",\n      \"img\": \"material img\",\n      \"idCategory\": material category id\n    } \n    ...\n  ]\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "HTTP/1.1 400 Bad Request",
+          "content": "{\n  \"code\": \"Faltan parametros para hacer la petición\",\n  \"message\": \"Hubo un problema al crear los datos\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "HTTP/1.1 403 Forbidden",
+          "content": "{\n  \"code\": {\n    mySQL throw error\n  },\n  \"message\": \"Hubo un problema al crear los datos\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "HTTP/1.1 500 Internal Server Error",
+          "content": "{\n  \"code\": {\n    ...error data\n  },\n  \"message\": \"Hubo un problema al crear los datos\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/services/material.rest.ts",
+    "groupTitle": "Material",
+    "name": "PostCreatematerial"
+  },
+  {
+    "type": "put",
+    "url": "/deleteMaterial",
+    "title": "deleteMaterial",
+    "version": "0.0.1",
+    "group": "Material",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Int",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Id del material que se va a eliminar</p>"
+          }
+        ]
+      }
+    },
+    "description": "<p>Servicio para eliminar un material</p>",
+    "success": {
+      "examples": [
+        {
+          "title": "HTTP/1.1 201 OK",
+          "content": "{\n  \"length\": material length,\n  \"data\": [\n    {\n      \"id\": material id,\n      \"name\": \"material name\",\n      \"pe\": \"material pe\",\n      \"power\": \"material power\",\n      \"duration\": \"material duration\",\n      \"location\": \"material location\",\n      \"description\": \"material description\",\n      \"img\": \"material img\",\n      \"idCategory\": material category id\n    } \n    ...\n  ]\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "HTTP/1.1 400 Bad Request",
+          "content": "{\n  \"code\": \"Faltan parametros para hacer la petición\",\n  \"message\": \"Hubo un problema al eliminar los datos\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "HTTP/1.1 403 Forbidden",
+          "content": "{\n  \"code\": {\n    mySQL throw error\n  },\n  \"message\": \"Hubo un problema al eliminar los datos\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "HTTP/1.1 500 Internal Server Error",
+          "content": "{\n  \"code\": {\n    ...error data\n  },\n  \"message\": \"Hubo un problema al eliminar los datos\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/services/material.rest.ts",
+    "groupTitle": "Material",
+    "name": "PutDeletematerial"
+  },
+  {
+    "type": "put",
+    "url": "/updateMaterial",
+    "title": "updateMaterial",
+    "version": "0.0.1",
+    "group": "Material",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Int",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Id del material que se va a actualizar</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>Nombre del material que se va a actualizar</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "pe",
+            "description": "<p>Puntos de vida del material que se va a actualizar</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "power",
+            "description": "<p>Poder del material que se va a actualizar</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "duration",
+            "description": "<p>Duración del material que se va a actualizar</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "location",
+            "description": "<p>Locación del material que se va a actualizar</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "description",
+            "description": "<p>Descripción del material que se va a actualizar</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "img",
+            "description": "<p>Imagen del material que se va a actualizar</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Int",
+            "optional": false,
+            "field": "idCategory",
+            "description": "<p>Id de la categoria del material que se va a actualizar</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"id\": material id,\n  \"name\": \"new material  name\",\n  \"pe\": \"new material  pe\",\n  \"power\": \"new material  power\",\n  \"duration\": \"new material  duration\",\n  \"location\": \"new material  location\",\n  \"description\": \"new material  description\",\n  \"img\": \"new material  image\",\n  \"idCategory\": 1 ...11 \n}",
+          "type": "json"
+        }
+      ]
+    },
+    "description": "<p>Servicio para actualizar un material</p>",
+    "success": {
+      "examples": [
+        {
+          "title": "HTTP/1.1 201 OK",
+          "content": "{\n  \"length\": material length,\n  \"data\": [\n    {\n      \"id\": material id,\n      \"name\": \"material name\",\n      \"pe\": \"material pe\",\n      \"power\": \"material power\",\n      \"duration\": \"material duration\",\n      \"location\": \"material location\",\n      \"description\": \"material description\",\n      \"img\": \"material img\",\n      \"idCategory\": material category id\n    } \n    ...\n  ]\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "HTTP/1.1 400 Bad Request",
+          "content": "{\n  \"code\": \"Faltan parametros para hacer la petición\",\n  \"message\": \"Hubo un problema al actualizar los datos\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "HTTP/1.1 403 Forbidden",
+          "content": "{\n  \"code\": {\n    mySQL throw error\n  },\n  \"message\": \"Hubo un problema al actualizar los datos\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "HTTP/1.1 500 Internal Server Error",
+          "content": "{\n  \"code\": {\n    ...error data\n  },\n  \"message\": \"Hubo un problema al actualizar los datos\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/services/material.rest.ts",
+    "groupTitle": "Material",
+    "name": "PutUpdatematerial"
+  },
+  {
     "type": "delete",
     "url": "/deleteNotification",
     "title": "deleteNotification",
